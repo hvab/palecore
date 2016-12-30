@@ -1,5 +1,6 @@
 .footer {
   height: 50px;
+  margin: auto;
 
   background-color: teal;
   background-image: resolve("footer__logo.svg");

@@ -1,1 +1,1 @@
-//=require gaze/lib/gaze.js
+//=require blocks/footer/footer.deps.js
