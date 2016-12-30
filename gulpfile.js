@@ -51,6 +51,7 @@ gulp.task('buildCss', function() {
         .pipe(postcss([
           require("postcss-import")(),
           require('postcss-for'),
+          require('postcss-simple-vars')(),
           require('postcss-calc')(),
           require("postcss-nested"),
           require("postcss-color-function"),
