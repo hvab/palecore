@@ -174,7 +174,16 @@ gulp.task('serve', function() {
     tunnel: false,
   });
 
-  browserSync.watch(DEST+'/**/*.*').on('change', browserSync.reload);
+  browserSync.watch([
+    DEST+'/**/*.*',
+    '!'+DEST+'/**/*.+(css|css.map)'
+  ]).on('change', browserSync.reload);
+
+  browserSync.watch(DEST+'/**/*.css', function (event, file) {
+    if (event === 'change') {
+      browserSync.reload(DEST+'/**/*.css');
+    }
+  });
 });
 
 gulp.task('dev', gulp.series('build', gulp.parallel('watch', 'serve')));
