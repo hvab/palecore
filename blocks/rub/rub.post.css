@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'ALSRublRegular';
+  font-weight: normal;
+  font-style: normal;
+
+  src: url('rouble-webfont.eot');
+  src: url('rouble-webfont.eot?#iefix') format('embedded-opentype'),
+       url('rouble-webfont.woff') format('woff'),
+       url('rouble-webfont.ttf') format('truetype'),
+       url('rouble-webfont.svg#ALSRublRegular') format('svg');
+}
+
+.rub {font-family:'ALSRublRegular', Tahoma;}

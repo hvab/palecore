@@ -1,8 +1,8 @@
 module.exports = {
   decl: [
-    'page',
     'header',
     'footer',
+    'rub'
   ]
 };
 

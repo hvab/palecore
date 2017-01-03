@@ -56,12 +56,16 @@ gulp.task('buildCss', function() {
           require("postcss-nested"),
           require("postcss-color-function"), // TODO: hsl()
           require('postcss-url')({
-            url: 'rebase',
-
+            url: "inline",
+            maxSize: 100,
+            fallback: "copy",
+            assetsPath: "assets",
           }),
           require('autoprefixer')(),
           require('postcss-reporter')()
-        ])).on('error', notify.onError(function(err) {
+        ], {
+          to: "dist/main.css",
+        })).on('error', notify.onError(function(err) {
           return {
             title: 'PostCSS',
             message: err.message,
