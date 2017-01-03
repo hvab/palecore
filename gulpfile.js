@@ -54,11 +54,10 @@ gulp.task('buildCss', function() {
           require('postcss-simple-vars')(),
           require('postcss-calc')(),
           require("postcss-nested"),
-          require("postcss-color-function"),
-          require('postcss-assets')({
-            loadPaths: [DEST+'/**'],
-            relative: DEST,
-            cachebuster: !isDevelopment
+          require("postcss-color-function"), // TODO: hsl()
+          require('postcss-url')({
+            url: 'rebase',
+
           }),
           require('autoprefixer')(),
           require('postcss-reporter')()
@@ -72,9 +71,9 @@ gulp.task('buildCss', function() {
         .pipe(concat(bundle.name + '.css'))
         .pipe(gulpIf(isDevelopment, sourcemaps.write('.')))
         .pipe(gulpIf(!isDevelopment, csso()))
-        .pipe(gulp.dest(DEST))
     }))
-    .pipe(debug({title: 'buildCss:'}));
+    .pipe(debug({title: 'buildCss:'}))
+    .pipe(gulp.dest(DEST));
 });
 
 gulp.task('buildImage', function() {

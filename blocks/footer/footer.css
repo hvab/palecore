@@ -3,5 +3,5 @@
   margin: auto;
 
   background-color: teal;
-  background-image: resolve("footer__logo.svg");
+  background-image: url("footer__logo.svg");
 }
