@@ -1,8 +1,8 @@
 module.exports = {
   decl: [
+    'neucha',
     'header',
     'footer',
-    'rub'
   ]
 };
 
