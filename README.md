@@ -1,5 +1,5 @@
 # palecore
-> Simple markup builder to start new project
+> Markup builder to start new project with BEM
 
 [![GitHub Release](https://img.shields.io/github/release/palegrow/palecore.svg?style=flat)](https://github.com/palegrow/palecore/releases)
 ![dependencies](https://david-dm.org/palegrow/palecore.svg)
