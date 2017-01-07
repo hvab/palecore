@@ -11,8 +11,8 @@ const flatten = require('gulp-flatten');
 const gulp = require('gulp');
 const gulpIf = require('gulp-if');
 const imagemin = require('gulp-imagemin');
-const include = require("gulp-include");
-const notify = require("gulp-notify");
+const include = require('gulp-include');
+const notify = require('gulp-notify');
 const nunjucks = require('gulp-nunjucks-html');
 const postcss = require('gulp-postcss');
 const posthtml = require('gulp-posthtml');
@@ -38,33 +38,32 @@ const builder = bundleBuilder({
   ],
   techMap: {
     css: ['post.css', 'css'],
-    js: ['js'],
-    image: ['jpg', 'png', 'svg']
+    js: ['js']
   }
 });
 
-gulp.task('buildCss', function() {
+gulp.task('bemCss', function() {
   return bundlerFs('bundles/*')
     .pipe(builder({
       css: bundle => bundle.src('css')
         .pipe(gulpIf(isDevelopment, sourcemaps.init()))
         .pipe(postcss([
-          require("postcss-import")(),
+          require('postcss-import')(),
           require('postcss-for'),
           require('postcss-simple-vars')(),
           require('postcss-calc')(),
-          require("postcss-nested"),
-          require("postcss-color-function"), // TODO: hsl()
+          require('postcss-nested'),
+          require('postcss-color-function'),
           require('postcss-url')({
-            url: "inline",
-            maxSize: 100,
-            fallback: "copy",
-            assetsPath: "assets",
+            url: 'inline',
+            maxSize: 0,
+            fallback: 'copy',
+            assetsPath: 'assets'
           }),
           require('autoprefixer')(),
           require('postcss-reporter')()
         ], {
-          to: "dist/main.css",
+          to: DEST + '/' + bundle.name + '.css',
         })).on('error', notify.onError(function(err) {
           return {
             title: 'PostCSS',
@@ -80,36 +79,24 @@ gulp.task('buildCss', function() {
     .pipe(gulp.dest(DEST));
 });
 
-gulp.task('buildImage', function() {
-  return bundlerFs('bundles/*')
-    .pipe(builder({
-      image: bundle => bundle.src('image')
-        .pipe(gulpIf(!isDevelopment, imagemin()))
-        .pipe(flatten())
-        .pipe(gulp.dest(DEST+'/images'))
-    }))
-    .pipe(debug({title: 'buildImage:'}));
-});
-
-gulp.task('buildJs', function() {
+gulp.task('bemJs', function() {
   return bundlerFs('bundles/*')
     .pipe(builder({
       js: bundle => bundle.src('js')
-      .pipe(gulpIf(isDevelopment, sourcemaps.init()))
-      .pipe(include({
-        includePaths: [
-          __dirname + '/node_modules',
-          __dirname + '/.'
-        ]
-      }))
-      .pipe(concat(bundle.name + '.js'))
-      .pipe(gulpIf(isDevelopment, sourcemaps.write('.')))
-      .pipe(gulpIf(!isDevelopment, uglify()))
-      .pipe(gulp.dest(DEST))
+        .pipe(gulpIf(isDevelopment, sourcemaps.init()))
+        .pipe(include({
+          includePaths: [
+            __dirname + '/node_modules',
+            __dirname + '/.'
+          ]
+        }))
+        .pipe(concat(bundle.name + '.js'))
+        .pipe(gulpIf(isDevelopment, sourcemaps.write('.')))
+        .pipe(gulpIf(!isDevelopment, uglify()))
     }))
-    .pipe(debug({title: 'buildJs:'}));
+    .pipe(debug({title: 'buildJs:'}))
+    .pipe(gulp.dest(DEST));
 });
-
 
 gulp.task('clean', function() {
   return del(DEST+'/*');
@@ -139,37 +126,34 @@ gulp.task('buildHtml', function() {
       })
     ])))
     .pipe(flatten())
-    .pipe(gulp.dest(DEST))
-    .pipe(debug({title: 'buildHtml:'}));
+    .pipe(debug({title: 'buildHtml:'}))
+    .pipe(gulp.dest(DEST));
 });
 
 gulp.task('build', gulp.series(
   'clean',
-  'buildImage',
-  gulp.parallel('buildCss', 'buildJs', 'buildHtml')
+  gulp.parallel('bemCss', 'bemJs', 'buildHtml')
 ));
 
 gulp.task('watch', function() {
   gulp.watch([
     'blocks/**/*.deps.js',
     'bundles/**/*.bemdecl.js'
-  ], gulp.series('buildImage', gulp.parallel('buildCss', 'buildJs')));
+  ], gulp.parallel('bemCss', 'bemJs'));
 
   gulp.watch([
     'pages/**/*.html',
     'templates/**/*.html'
   ], gulp.series('buildHtml'));
 
-  gulp.watch('blocks/**/*.css', gulp.series('buildCss'));
+  gulp.watch('blocks/**/*.css', gulp.series('bemCss'));
 
-  gulp.watch('blocks/**/*.js', gulp.series('buildJs'));
-
-  gulp.watch('blocks/**/*.+(png|jpg|svg)', gulp.series('buildImage', 'buildCss'));
+  gulp.watch('blocks/**/*.js', gulp.series('bemJs'));
 });
 
 gulp.task('serve', function() {
   browserSync.init({
-    logPrefix: "palecore",
+    logPrefix: 'palecore',
     server: DEST,
     port: isDevelopment ? 3000 : 8080,
     notify: false,
