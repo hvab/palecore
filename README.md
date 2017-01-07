@@ -1,63 +1,29 @@
 # palecore
+> Simple markup builder to start new project
 
-> Markup builder to start new project with BEM
+[![GitHub Release](https://img.shields.io/github/release/palegrow/palecore.svg?style=flat)](https://github.com/palegrow/palecore/releases)
+![dependencies](https://david-dm.org/palegrow/palecore.svg)
 
-## Команды
-
+## Install
 ```sh
-npm start       # Запуск сборки, вотчеров, сервера
-
-npm run build   # Сборка на продакшн
+git clone https://github.com/palegrow/palecore.git new-project
+cd new-project
+npm install
 ```
 
-## Структура проекта
-
+## Usage
+Basic developer usage
 ```sh
-/blocks/    # Блоки (js, css, post.css jpg, png, svg)
-/bundles/   # Бандлы (bemdecl.js)
-/pages/     # Страницы (nunjucks, html)
-/templates/ # Шаблоны (nunjucks, html)
+export PATH=./node_modules/.bin:$PATH
+export NODE_ENV=development
+npm start # gulp
 ```
 
-## Порядок сборки
-
-1. Всё лежит только в блоках.
-
-2. Основной уровень `/blocks/`.
-
-3. Варианты уровней:
+Production
 ```sh
-/desktop.blocks/
-/touch.blocks/
-/design/blocks/
-/design/desktop.blocks/
-/design/touch.blocks/
+NODE_ENV=production gulp
 ```
-
-4. Блоки собираются по декларациям, которые лежат в `/bundles/` и кладутся в `/dist/`.
-
-5. Стили:
-  а) проходят через postcss,
-  б) автопрефиксер,
-  г) склеиваются,
-  д) сжимаются,
-  е) копируются в `/dist/{delcName}/{delcName}.css`.
-
-6. Скрипты:
-  а) склеиваются,
-  б) сжимаются,
-  d) копируются в `/dist/{delcName}/{delcName}.js`.
-
-7. Картинки, которые указаны в зависимостях блока:
-  а) сжимаются (кеш для оптимизации),
-  б) убираются относительные пути,
-  в) копируются в `/dist/{delcName}/images/`.
-
-8. Если картинка, которую надо вставить в `background-image` весит больше 14 Кбайт, то вставлять ее в HTML, и указать в зависимостях:
-```js
-[{
-  shouldDeps: [
-    { elems: ['image'] }
-  ]
-}];
+or just build `dist` without run server
+```sh
+npm run build # NODE_ENV=production gulp build
 ```

@@ -24,7 +24,6 @@ const uglify = require('gulp-uglify');
 // Версионирование
 // Кеширование
 // Линтеры
-// Внешний файл для конфига (dist, levels, techMap, browsers)
 
 
 const isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV == 'development';
