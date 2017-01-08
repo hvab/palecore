@@ -25,8 +25,8 @@ const DEST = 'dist';
 
 const builder = bundleBuilder({
   levels: [
-    'node_modules/pale-blocks/blocks',
-    'node_modules/pale-blocks/design/blocks',
+    __dirname + '/node_modules/pale-blocks/blocks',
+    __dirname + '/node_modules/pale-blocks/design/blocks',
     'blocks'
   ],
   techMap: {
