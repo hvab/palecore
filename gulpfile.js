@@ -20,12 +20,6 @@ const sourcemaps = require('gulp-sourcemaps');
 const typograf = require('gulp-typograf');
 const uglify = require('gulp-uglify');
 
-// TODO:
-// Версионирование
-// Кеширование
-// Линтеры
-
-
 const isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV == 'development';
 const DEST = 'dist';
 
@@ -37,7 +31,8 @@ const builder = bundleBuilder({
   ],
   techMap: {
     css: ['post.css', 'css'],
-    js: ['js']
+    js: ['js'],
+    image: ['jpg', 'png', 'svg']
   }
 });
 
@@ -97,8 +92,15 @@ gulp.task('bemJs', function() {
     .pipe(gulp.dest(DEST));
 });
 
-gulp.task('clean', function() {
-  return del(DEST+'/*');
+gulp.task('bemImage', function() {
+  return bundlerFs('bundles/*')
+    .pipe(builder({
+      image: bundle => bundle.src('image')
+        .pipe(gulpIf(!isDevelopment, imagemin()))
+        .pipe(flatten())
+    }))
+    .pipe(debug({title: 'bemImage:'}))
+    .pipe(gulp.dest(DEST+'/assets'));
 });
 
 gulp.task('buildHtml', function() {
@@ -129,9 +131,13 @@ gulp.task('buildHtml', function() {
     .pipe(gulp.dest(DEST));
 });
 
+gulp.task('clean', function() {
+  return del(DEST+'/*');
+});
+
 gulp.task('build', gulp.series(
   'clean',
-  gulp.parallel('bemCss', 'bemJs', 'buildHtml')
+  gulp.parallel('bemCss', 'bemJs', 'bemImage', 'buildHtml')
 ));
 
 gulp.task('watch', function() {
@@ -148,6 +154,8 @@ gulp.task('watch', function() {
   gulp.watch('blocks/**/*.css', gulp.series('bemCss'));
 
   gulp.watch('blocks/**/*.js', gulp.series('bemJs'));
+
+  gulp.watch('blocks/**/*.+(png|jpg|svg)', gulp.series('bemImage'));
 });
 
 gulp.task('serve', function() {
