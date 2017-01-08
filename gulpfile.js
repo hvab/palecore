@@ -55,7 +55,7 @@ gulp.task('bemCss', function() {
           require('postcss-color-function'),
           require('postcss-url')({
             url: 'inline',
-            maxSize: 0,
+            maxSize: 150,
             fallback: 'copy',
             assetsPath: 'assets'
           }),
@@ -74,7 +74,7 @@ gulp.task('bemCss', function() {
         .pipe(gulpIf(isDevelopment, sourcemaps.write('.')))
         .pipe(gulpIf(!isDevelopment, csso()))
     }))
-    .pipe(debug({title: 'buildCss:'}))
+    .pipe(debug({title: 'bemCss:'}))
     .pipe(gulp.dest(DEST));
 });
 
@@ -93,7 +93,7 @@ gulp.task('bemJs', function() {
         .pipe(gulpIf(isDevelopment, sourcemaps.write('.')))
         .pipe(gulpIf(!isDevelopment, uglify()))
     }))
-    .pipe(debug({title: 'buildJs:'}))
+    .pipe(debug({title: 'bemJs:'}))
     .pipe(gulp.dest(DEST));
 });
 
