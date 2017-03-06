@@ -115,7 +115,7 @@ gulp.task('buildHtml', function() {
       };
     }))
     .pipe(typograf({
-      lang: 'ru',
+      locale: ['ru', 'en-US'],
       mode: 'digit'
     }))
     .pipe(gulpIf(!isDevelopment, posthtml([
