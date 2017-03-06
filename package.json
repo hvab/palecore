@@ -1,6 +1,6 @@
 {
   "name": "palecore",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Markup builder to start new project with BEM",
   "main": "gulpfile.js",
   "scripts": {
