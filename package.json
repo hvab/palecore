@@ -27,7 +27,7 @@
     "gulp-bem-bundle-builder": "^0.1.2",
     "gulp-bem-bundler-fs": "0.0.10",
     "gulp-concat": "^2.6.1",
-    "gulp-csso": "^2.0.0",
+    "gulp-csso": "^3.0.0",
     "gulp-debug": "^3.1.0",
     "gulp-flatten": "^0.3.1",
     "gulp-if": "^2.0.2",
@@ -47,7 +47,7 @@
     "postcss-nested": "^1.0.0",
     "postcss-reporter": "^3.0.0",
     "postcss-simple-vars": "^3.0.0",
-    "postcss-url": "^5.1.2",
+    "postcss-url": "^6.0.4",
     "posthtml-alt-always": "^1.0.1",
     "posthtml-minifier": "^0.1.0"
   }
