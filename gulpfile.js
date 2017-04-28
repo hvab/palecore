@@ -144,7 +144,7 @@ gulp.task('watch', function() {
   gulp.watch([
     'blocks/**/*.deps.js',
     'bundles/**/*.bemdecl.js'
-  ], gulp.parallel('bemCss', 'bemJs'));
+  ], gulp.parallel('bemCss', 'bemJs', 'bemImage'));
 
   gulp.watch([
     'pages/**/*.html',
@@ -153,9 +153,12 @@ gulp.task('watch', function() {
 
   gulp.watch('blocks/**/*.css', gulp.series('bemCss'));
 
-  gulp.watch('blocks/**/*.js', gulp.series('bemJs'));
+  gulp.watch([
+    'blocks/**/*.js',
+    '!blocks/**/*.deps.js'
+  ], gulp.series('bemJs'));
 
-  gulp.watch('blocks/**/*.+(png|jpg|svg)', gulp.series('bemImage'));
+  gulp.watch('blocks/**/*.+(png|jpg|svg)', gulp.parallel('bemCss','bemImage'));
 });
 
 gulp.task('serve', function() {
