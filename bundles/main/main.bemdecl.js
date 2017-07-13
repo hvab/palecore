@@ -1,26 +1,9 @@
 module.exports = {
   decl: [
+    'page',
     'neucha',
     'header',
     'footer',
+    'fancybox',
   ]
 };
-
-// module.exports = {
-//   decl: [
-//     'page',
-//     'button',
-//     'clearfix',
-//     'container',
-//     'content',
-//     'hint',
-//     'icon',
-//     'image',
-//     'link',
-//     'media',
-//     'table',
-//     'text',
-//     'header',
-//     'footer'
-//   ]
-// };

@@ -1,22 +1,33 @@
 <!DOCTYPE html>
 <html lang="ru-RU">
+{% block page__head %}
   <head>
+  {% block page__meta %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% endblock page__meta %}
 
-    <title></title>
+  {% block page__title %}
+    <title>{% block page__titleContent %}{% endblock page__titleContent %}</title>
+  {% endblock page__title %}
 
-    <link rel="icon" href="/favicon.ico">
+  {% block page__favicon %}
+    {# {% include "_favicon.html" %} #}
+  {% endblock page__favicon %}
 
+  {% block page__styles %}
     <link rel="stylesheet" href="main.css">
+  {% endblock page__styles %}
   </head>
+{% endblock page__head %}
   <body class="page page_theme_pale">
+  {# {% include "_browser-updater.html" %} #}
 
-    {% block page %}
-    BLOCK PAGE
-    {% endblock page %}
+  {% block page__content %}{% endblock page__content %}
 
+  {% block page__scripts %}
     <script src="main.js"></script>
+  {% endblock page__scripts %}
   </body>
 </html>

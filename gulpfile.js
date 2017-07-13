@@ -1,32 +1,48 @@
 'use strict';
 
-const browserSync = require('browser-sync').create();
+const del = require('del');
+
 const bundleBuilder = require('gulp-bem-bundle-builder');
 const bundlerFs = require('gulp-bem-bundler-fs');
-const concat = require('gulp-concat');
-const csso = require('gulp-csso');
-const debug = require('gulp-debug');
-const del = require('del');
-const flatten = require('gulp-flatten');
+
 const gulp = require('gulp');
+const concat = require('gulp-concat');
+const debug = require('gulp-debug');
+const flatten = require('gulp-flatten');
 const gulpIf = require('gulp-if');
 const imagemin = require('gulp-imagemin');
 const include = require('gulp-include');
 const notify = require('gulp-notify');
-const nunjucks = require('gulp-nunjucks-html');
-const postcss = require('gulp-postcss');
-const posthtml = require('gulp-posthtml');
 const sourcemaps = require('gulp-sourcemaps');
-const typograf = require('gulp-typograf');
 const uglify = require('gulp-uglify');
+
+const postcss = require('gulp-postcss');
+const autoprefixer = require('autoprefixer');
+const csso = require('gulp-csso');
+const postcssCalc = require('postcss-calc');
+const postcssColorFunction = require('postcss-color-function');
+const postcssFor = require('postcss-for');
+const postcssImport = require('postcss-import');
+const postcssNested = require('postcss-nested');
+const postcssReporter = require('postcss-reporter');
+const postcssSimpleVars = require('postcss-simple-vars');
+const postcssUrl = require('postcss-url');
+
+const nunjucks = require('gulp-nunjucks-html');
+const posthtml = require('gulp-posthtml');
+const posthtmlAltAlways = require('posthtml-alt-always');
+const posthtmlMinifier = require('posthtml-minifier');
+const typograf = require('gulp-typograf');
+
+const browserSync = require('browser-sync').create();
 
 const isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV == 'development';
 const DEST = 'dist';
 
 const builder = bundleBuilder({
   levels: [
-    __dirname + '/node_modules/pale-blocks/blocks',
-    __dirname + '/node_modules/pale-blocks/design/blocks',
+    'node_modules/pale-blocks/blocks',
+    'node_modules/pale-blocks/design/blocks',
     'blocks'
   ],
   techMap: {
@@ -42,20 +58,17 @@ gulp.task('bemCss', function() {
       css: bundle => bundle.src('css')
         .pipe(gulpIf(isDevelopment, sourcemaps.init()))
         .pipe(postcss([
-          require('postcss-import')(),
-          require('postcss-for'),
-          require('postcss-simple-vars')(),
-          require('postcss-calc')(),
-          require('postcss-nested'),
-          require('postcss-color-function'),
-          require('postcss-url')({
-            url: 'inline',
-            maxSize: 150,
-            fallback: 'copy',
-            assetsPath: 'assets'
+          postcssImport(),
+          postcssFor,
+          postcssSimpleVars(),
+          postcssCalc(),
+          postcssNested,
+          postcssColorFunction,
+          postcssUrl({
+            url: isDevelopment ? 'copy' : 'inline'
           }),
-          require('autoprefixer')(),
-          require('postcss-reporter')()
+          autoprefixer(),
+          postcssReporter()
         ], {
           to: DEST + '/' + bundle.name + '.css',
         })).on('error', notify.onError(function(err) {
@@ -119,8 +132,8 @@ gulp.task('buildHtml', function() {
       mode: 'digit'
     }))
     .pipe(gulpIf(!isDevelopment, posthtml([
-      require('posthtml-alt-always')(),
-      require('posthtml-minifier')({
+      posthtmlAltAlways(),
+      posthtmlMinifier({
         removeComments: true,
         collapseWhitespace: true,
         minifyJS: true
@@ -131,13 +144,19 @@ gulp.task('buildHtml', function() {
     .pipe(gulp.dest(DEST));
 });
 
+gulp.task('buildAssets', function() {
+  return gulp.src('assets/**/*.*')
+    .pipe(debug({title: 'buildAssets:'}))
+    .pipe(gulp.dest(DEST));
+});
+
 gulp.task('clean', function() {
   return del(DEST+'/*');
 });
 
 gulp.task('build', gulp.series(
   'clean',
-  gulp.parallel('bemCss', 'bemJs', 'bemImage', 'buildHtml')
+  gulp.parallel('bemCss', 'bemJs', 'bemImage', 'buildHtml', 'buildAssets')
 ));
 
 gulp.task('watch', function() {
@@ -152,6 +171,8 @@ gulp.task('watch', function() {
   ], gulp.series('buildHtml'));
 
   gulp.watch('blocks/**/*.css', gulp.series('bemCss'));
+
+  gulp.watch('assets/**/*.*', gulp.series('buildAssets'));
 
   gulp.watch([
     'blocks/**/*.js',
