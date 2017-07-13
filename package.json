@@ -17,7 +17,7 @@
   "dependencies": {
     "@fancyapps/fancybox": "^3.1.20",
     "jquery": "^3.2.1",
-    "pale-blocks": "^0.5.1"
+    "pale-blocks": "^0.6.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
