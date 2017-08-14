@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
-    "browser-sync": "^2.18.12",
+    "browser-sync": "^2.18.13",
     "del": "^3.0.0",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-bem-bundle-builder": "^0.1.4",
@@ -44,10 +44,10 @@
     "postcss-color-function": "^4.0.0",
     "postcss-for": "^2.1.1",
     "postcss-import": "^10.0.0",
-    "postcss-nested": "^2.0.2",
-    "postcss-reporter": "^4.0.0",
+    "postcss-nested": "^2.1.1",
+    "postcss-reporter": "^5.0.0",
     "postcss-simple-vars": "^4.0.0",
-    "postcss-url": "^7.0.0",
+    "postcss-url": "^7.1.2",
     "posthtml-alt-always": "^1.0.1",
     "posthtml-minifier": "^0.1.0"
   }
