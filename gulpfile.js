@@ -67,7 +67,9 @@ gulp.task('bemCss', function() {
           postcssUrl({
             url: isDevelopment ? 'copy' : 'inline'
           }),
-          autoprefixer(),
+          autoprefixer({
+            add: !isDevelopment
+          }),
           postcssReporter()
         ], {
           to: DEST + '/' + bundle.name + '.css',
