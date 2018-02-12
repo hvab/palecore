@@ -23,7 +23,7 @@
     "autoprefixer": "^8.0.0",
     "browser-sync": "^2.23.6",
     "del": "^3.0.0",
-    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp": "^4.0.0",
     "gulp-bem-bundle-builder": "^0.1.5",
     "gulp-bem-bundler-fs": "0.0.10",
     "gulp-concat": "^2.6.1",
