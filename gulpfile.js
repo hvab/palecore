@@ -8,6 +8,7 @@ const concat = require('gulp-concat');
 const debug = require('gulp-debug');
 const flatten = require('gulp-flatten');
 const gulpIf = require('gulp-if');
+const gulpOneOf = require('gulp-one-of');
 const imagemin = require('gulp-imagemin');
 const include = require('gulp-include');
 const notify = require('gulp-notify');
@@ -54,6 +55,7 @@ gulp.task('bemCss', function() {
         css: bundle =>
           bundle
             .src('css')
+            .pipe(gulpOneOf())
             .pipe(gulpIf(isDevelopment, sourcemaps.init()))
             .pipe(
               postcss(
