@@ -1,5 +1,6 @@
 @import "../variables/variables.post.css";
 
 .page {
-  margin: 0;
+  background-color: #fefefe;
+  color: $font-color;
 }

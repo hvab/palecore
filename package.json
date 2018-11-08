@@ -1,6 +1,6 @@
 {
   "name": "palecore",
-  "version": "0.1.10",
+  "version": "0.2.0",
   "description": "Markup builder to start new project with BEM",
   "main": "gulpfile.js",
   "scripts": {
@@ -10,18 +10,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "browserslist": [
-    "> 1%",
-    "last 2 versions"
-  ],
   "dependencies": {
-    "@fancyapps/fancybox": "^3.5.1",
-    "jquery": "^3.3.1",
-    "pale-blocks": "^0.6.0"
+    "@fancyapps/fancybox": "^3.5.2",
+    "jquery": "^3.3.1"
   },
   "devDependencies": {
-    "autoprefixer": "^9.1.5",
-    "browser-sync": "^2.24.7",
+    "autoprefixer": "^9.3.1",
+    "browser-sync": "^2.26.3",
     "del": "^3.0.0",
     "gulp": "^4.0.0",
     "gulp-bem-bundle-builder": "^0.1.5",
@@ -31,7 +26,7 @@
     "gulp-debug": "^4.0.0",
     "gulp-flatten": "^0.4.0",
     "gulp-if": "^2.0.2",
-    "gulp-imagemin": "^4.1.0",
+    "gulp-imagemin": "^5.0.3",
     "gulp-include": "^2.3.1",
     "gulp-notify": "^3.2.0",
     "gulp-nunjucks-html": "^2.0.0",
@@ -40,10 +35,10 @@
     "gulp-sourcemaps": "^2.6.4",
     "gulp-typograf": "^3.1.0",
     "gulp-uglify": "^3.0.1",
-    "postcss-calc": "^6.0.2",
+    "postcss-calc": "^7.0.1",
     "postcss-color-function": "^4.0.1",
     "postcss-for": "^2.1.1",
-    "postcss-import": "^12.0.0",
+    "postcss-import": "^12.0.1",
     "postcss-nested": "^4.1.0",
     "postcss-reporter": "^6.0.0",
     "postcss-simple-vars": "^5.0.1",

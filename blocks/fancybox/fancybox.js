@@ -1,7 +1,5 @@
 //=require @fancyapps/fancybox/dist/jquery.fancybox.js
 
-$( document ).ready(function() {
-
+$(document).ready(function() {
   $('.fancybox').fancybox();
-
 });

@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="ru-RU">
+<!doctype html>
+<html lang="ru">
 {% block page__head %}
   <head>
   {% block page__meta %}
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   {% endblock page__meta %}
 
   {% block page__title %}
@@ -21,7 +20,7 @@
   {% endblock page__styles %}
   </head>
 {% endblock page__head %}
-  <body class="page page_theme_pale">
+  <body class="page">
   {# {% include "_browser-updater.html" %} #}
 
   {% block page__content %}{% endblock page__content %}

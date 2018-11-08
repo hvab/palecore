@@ -2,6 +2,8 @@
 
 Блок для всплывающих окон.
 
+https://fancyapps.com/fancybox/3/docs/
+
 Примеры
 
 ```html

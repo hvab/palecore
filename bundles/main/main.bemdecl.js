@@ -1,9 +1,3 @@
 module.exports = {
-  decl: [
-    'page',
-    'neucha',
-    'header',
-    'footer',
-    'fancybox',
-  ]
+  decl: ['jquery', 'fancybox', 'page'],
 };
