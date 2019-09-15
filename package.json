@@ -18,7 +18,7 @@
   "devDependencies": {
     "autoprefixer": "^9.6.1",
     "browser-sync": "^2.26.7",
-    "del": "^5.0.0",
+    "del": "^5.1.0",
     "gulp": "^4.0.2",
     "gulp-bem-bundle-builder": "^0.1.5",
     "gulp-bem-bundler-fs": "0.0.10",
@@ -27,7 +27,7 @@
     "gulp-debug": "^4.0.0",
     "gulp-flatten": "^0.4.0",
     "gulp-if": "^3.0.0",
-    "gulp-imagemin": "^6.0.0",
+    "gulp-imagemin": "^6.1.0",
     "gulp-include": "^2.4.1",
     "gulp-notify": "^3.2.0",
     "gulp-nunjucks-html": "^2.0.0",
