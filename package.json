@@ -13,7 +13,7 @@
   "dependencies": {
     "@fancyapps/fancybox": "^3.5.7",
     "gulp-one-of": "^1.0.1",
-    "jquery": "^3.4.1"
+    "jquery": "^3.5.0"
   },
   "devDependencies": {
     "autoprefixer": "^9.7.4",
