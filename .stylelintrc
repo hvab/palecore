@@ -13,7 +13,6 @@
     "declaration-block-no-shorthand-property-overrides": true,
     "font-family-no-duplicate-names": true,
     "font-family-no-missing-generic-family-keyword": true,
-    "function-calc-no-invalid": true,
     "function-calc-no-unspaced-operator": true,
     "function-linear-gradient-no-nonstandard-direction": true,
     "keyframe-declaration-no-important": true,
@@ -132,7 +131,6 @@
     "value-list-comma-space-after": "always-single-line",
     "value-list-comma-space-before": "never",
     "value-list-max-empty-lines": 0,
-    "font-family-name-quotes": "always-where-required",
     "string-quotes": "double",
     "shorthand-property-no-redundant-values": true
   }
